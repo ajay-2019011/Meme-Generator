@@ -1,9 +1,10 @@
 import React from 'react'
-
+let img = require("../images/trollface.png");
 export default function Navabar() {
   return (
-    <div>
-      <h1>Hi I am Header!</h1>
+    <div className='navbar'>
+      <img id="nav-img" src={img} alt="Not Found"></img>
+      <p id='heading1'>Meme Generator</p>
     </div>
   )
 }
