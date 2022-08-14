@@ -5,6 +5,7 @@ export default function Navabar() {
     <div className='navbar'>
       <img id="nav-img" src={img} alt="Not Found"></img>
       <p id='heading1'>Meme Generator</p>
+      <p id="heading2">Want to make Memes? Lets Go!</p>
     </div>
   )
 }
