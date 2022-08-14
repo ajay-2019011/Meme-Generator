@@ -3,9 +3,10 @@ import memesData from "../memesData.js"
 
 export default function Meme() {
   function handleClick() {
-    let len = memesData.data.memes.length;
-    let r = Math.floor(Math.random() * len) + 1;
-    let url = memesData.data.memes[r].url;
+    const memesArray = memesData.data.memes;
+    let len = memesArray.length;
+    let r = Math.floor(Math.random() * len);
+    let url = memesArray[r].url;
     console.log(url);
   }
   return (
