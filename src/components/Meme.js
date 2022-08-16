@@ -2,12 +2,17 @@ import React from "react"
 import memesData from "../memesData.js"
 
 export default function Meme() {
+  const memesArray = memesData.data.memes;
+  const len = memesArray.length;
+
+  //Using array destructuring, to take input as an array in LHS
+  const [imgUrl, setImgUrl] = React.useState(memesArray[0].url);
+
   function handleClick() {
-    const memesArray = memesData.data.memes;
-    let len = memesArray.length;
     let r = Math.floor(Math.random() * len);
     let url = memesArray[r].url;
-    console.log(url);
+    //Changing the state
+    setImgUrl(url);
   }
   return (
     <div className="meme">
@@ -33,6 +38,7 @@ export default function Meme() {
           onClick={handleClick}
         >Get a new Meme image 🖼</button>
       </div>
+      <img id="memeImg" src={imgUrl} alt="NotFound" />
     </div>
   )
 }
