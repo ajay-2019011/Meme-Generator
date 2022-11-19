@@ -1,4 +1,5 @@
 import React from "react"
+import '../styles/meme.css';
 import memesData from "../memesData.js"
 
 export default function Meme() {
@@ -13,6 +14,10 @@ export default function Meme() {
     let url = memesArray[r].url;
     //Changing the state
     setImgUrl(url);
+    //If the new state is dependent on the previous one
+    //Then we have to use function inside the setter function
+    //which takes the old values as parameter
+    //Ex. setTrue(prevVal => !prevVal)
   }
   return (
     <div className="meme">
@@ -38,7 +43,11 @@ export default function Meme() {
           onClick={handleClick}
         >Get a new Meme image 🖼</button>
       </div>
-      <img id="memeImg" src={imgUrl} alt="NotFound" />
+      <div className="selected">
+        <img className="selected-pic" id="memeImg" src={imgUrl} alt="NotFound" />
+        <h2 className="selected-text top">One does not simply</h2>
+        <h2 className="selected-text bottom">Walk into Mordor</h2>
+      </div>
     </div>
   )
 }

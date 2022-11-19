@@ -1,4 +1,6 @@
 import React from 'react'
+import '../styles/navbar.css';
+
 let img = require("../images/trollface.png");
 export default function Navabar() {
   return (
