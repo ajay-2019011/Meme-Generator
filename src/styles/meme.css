@@ -57,7 +57,7 @@ label {
 
 .selected-pic {
   max-width: 100%;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
 .selected-text {

@@ -1,10 +1,31 @@
-import React from "react"
+import React, {useEffect} from "react"
 import '../styles/meme.css';
 import memesData from "../memesData.js"
 
 export default function Meme() {
-  const memesArray = memesData.data.memes;
+  const [memesArray, setMemesArray] = React.useState(memesData.data.memes);
+
+  //We can use 'async' functions instead of .then as well
+  async function getMemes() {
+    const res = await fetch("https://api.imgflip.com/get_memes")
+    const memesData = await res.json()
+    setMemesArray(memesData.data.memes)
+    //OR
+    // fetch("https://api.imgflip.com/get_memes")
+    //   .then(res => res.json())
+    //   .then(memesData => setMemesArray(memesData.data.memes))
+  }
+
+  useEffect(() => {
+
+    getMemes();
+    
+  }, [])
+
+  console.log("rendered")
   const len = memesArray.length;
+  const [topText, setTopText] = React.useState("Top Text");
+  const [bottomText, setBottomText] = React.useState("Bottom Text");
 
   //Using array destructuring, to take input as an array in LHS
   const [imgUrl, setImgUrl] = React.useState(memesArray[0].url);
@@ -19,6 +40,14 @@ export default function Meme() {
     //which takes the old values as parameter
     //Ex. setTrue(prevVal => !prevVal)
   }
+  function handleTopText(event) {
+    //console.log(event.target.value);
+    setTopText(event.target.value);
+  }
+  function handleBottomText(event) {
+    //console.log(event.target.value);
+    setBottomText(event.target.value);
+  }
   return (
     <div className="meme">
       <div className="input">
@@ -28,6 +57,7 @@ export default function Meme() {
           id="up"
           placeholder="Top Text"
           type="text"
+          onChange={handleTopText}
         />
         <label for="down">Down:</label>
         <input
@@ -35,6 +65,7 @@ export default function Meme() {
           id="down"
           placeholder="Bottom Text"
           type="text"
+          onChange={handleBottomText}
         />
       </div>  
       <div id="btn">
@@ -45,8 +76,8 @@ export default function Meme() {
       </div>
       <div className="selected">
         <img className="selected-pic" id="memeImg" src={imgUrl} alt="NotFound" />
-        <h2 className="selected-text top">One does not simply</h2>
-        <h2 className="selected-text bottom">Walk into Mordor</h2>
+        <h2 className="selected-text top">{topText}</h2>
+        <h2 className="selected-text bottom">{bottomText}</h2>
       </div>
     </div>
   )
